@@ -16,7 +16,6 @@ VOID SetBreakpoints()
 VOID MyDrawXModelSkinnedCached( INT a1, INT a2, INT a3 )
 {
 	CHAR* ModelName;
-
 	_asm{
 		PUSHAD;
 		MOV EBX, [EDI + 0xB8];

@@ -1,14 +1,15 @@
 
 #ifndef TOOLS_H 
 #define TOOLS_H 
-#include "d3dx9.h"
 #include "Headers.h" 
-
 namespace Tools
 {
 	IDirect3DTexture9* Textura = NULL;
 	void CreateTexturaDoCairo(IDirect3DDevice9* Device, IDirect3DTexture9* text){
-		D3DXCreateTextureFromFile(Device, "cairo.jpg", &text);
+		HRESULT r = D3DXCreateTextureFromFile(Device, "cairo.jpg", &text);
+		if (!r == D3D_OK){ //nao conseguimos criar textura ;//
+			exit(r);
+		}
 	}
 	VOID WriteLog( CHAR* String, ... )
 	{
@@ -23,7 +24,7 @@ namespace Tools
 
 		fopen_s( &LogFile, "LogFile.txt", "a+" );
 
-		CHAR Timestruct[16] = "hh':'mm':'ss tt";                                  
+		CHAR Timestruct[16] = "hh':'mm':'ss tt";    //format com date :D                              
 		GetTimeFormat( NULL, NULL, NULL, NULL, Timestruct, 15 );
 
 		fprintf( LogFile, "[%s] %s\n", Timestruct, Buffer );
