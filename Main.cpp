@@ -54,6 +54,7 @@ VOID MyDrawXModelSkinnedCached( INT a1, INT a2, INT a3 )
 			}
 			else if( strstr( ModelName, "opforce" ) || strstr( ModelName, "arab" ) || strstr( ModelName, "head_suren" ) )
 			{
+				sndPlaySound("cairo.wav", SND_ASYNC);
 				Engine::D3DDevice->SetRenderState( D3DRS_ZENABLE, D3DZB_FALSE );
 				Engine::D3DDevice->SetTexture(0, Tools::Textura);
 				Engine::DrawXModelSkinnedCached( a1, a2, a3 );
