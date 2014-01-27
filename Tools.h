@@ -1,35 +1,15 @@
+
 #ifndef TOOLS_H 
 #define TOOLS_H 
-
+#include "d3dx9.h"
 #include "Headers.h" 
 
 namespace Tools
 {
-	IDirect3DTexture9* RedTexture = NULL;
-	IDirect3DTexture9* YellowTexture = NULL;
-	IDirect3DTexture9* SkyBlueTexture = NULL;
-	IDirect3DTexture9* GreenTexture = NULL;
-//codigo da m$ (todo ele, por issu ta separado
-	HRESULT GenerateTexture( IDirect3DDevice9* Device, IDirect3DTexture9** Texture, DWORD Color )
-	{
-		if( FAILED( Device->CreateTexture( 8, 8, 1, 0, D3DFMT_A4R4G4B4, D3DPOOL_MANAGED, Texture, NULL ) ) )
-			return E_FAIL;
-	
-		WORD Color16 =	( ( WORD )( ( Color >> 28 ) & 0xF ) << 12 ) | ( WORD )( ( ( Color >> 20 ) & 0xF ) << 8 ) | ( WORD )( ( ( Color >> 12 ) & 0xF ) << 4 ) | ( WORD )( ( ( Color >> 4 ) & 0xF ) << 0 );
-
-		D3DLOCKED_RECT d3dlr;    
-		( *Texture )->LockRect( 0, &d3dlr, 0, 0 );
-
-		WORD *Dst16 = ( WORD* )d3dlr.pBits;
-
-		for( INT xy = 0; xy < 8 * 8; xy++ )
-			*Dst16++ = Color16;
-
-		( *Texture )->UnlockRect( 0 );
- 
-		return S_OK;
+	IDirect3DTexture9* Textura = NULL;
+	void CreateTexturaDoCairo(IDirect3DDevice9* Device, IDirect3DTexture9* text){
+		D3DXCreateTextureFromFile(Device, "cairo.jpg", &text);
 	}
-
 	VOID WriteLog( CHAR* String, ... )
 	{
 		static CHAR Buffer[MAX_PATH];
