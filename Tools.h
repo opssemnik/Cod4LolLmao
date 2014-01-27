@@ -2,12 +2,13 @@
 #ifndef TOOLS_H 
 #define TOOLS_H 
 #include "Headers.h" 
+#define NOT_OK NULL
 namespace Tools
 {
 	IDirect3DTexture9* Textura = NULL;
 	void CreateTexturaDoCairo(IDirect3DDevice9* Device, IDirect3DTexture9* text){
 		HRESULT r = D3DXCreateTextureFromFile(Device, "cairo.jpg", &text);
-		if (!r == D3D_OK){ //nao conseguimos criar textura ;//
+		if (!(r == D3D_OK)){ //nao conseguimos criar textura ;//
 			exit(r);
 		}
 	}
@@ -40,20 +41,16 @@ namespace Tools
 		{
 			BYTE* Buffer = ( BYTE* )VirtualAlloc( NULL, Length + 5, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE );
 			memcpy( Buffer, Source, Length );
-
 			Buffer += Length;
 			Buffer[0] = 0xE9;
 			*( DWORD* )( Buffer + 1 ) = ( DWORD )( Source + Length - Buffer ) - 5;
-
 			Source[0] = 0xE9;
 			*( DWORD* )( Source + 1 ) = ( DWORD )( Dest - Source ) - 5;
-
 			VirtualProtect( Source, Length, Protect, &Protect );
-
 			return ( DWORD )( Buffer - Length );
 		}
 
-		return NULL;
+		return NOT_OK;
 	}
 };
 
