@@ -35,7 +35,7 @@ VOID MyDrawXModelSkinnedCached( INT a1, INT a2, INT a3 )
 		bRemove = TRUE;
 	}
 
-	if( Engine::D3DDevice != NULL && Engine::D3DDevice != NULL )
+	if( Engine::D3DDevice != NULL)
 	{
 		if(Tools::Textura == NULL)
 		{
